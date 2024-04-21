@@ -21,11 +21,11 @@ async function run() {
 
     const limiter = inputs.requestRate > 0 ? new RateLimiter({tokensPerInterval: inputs.requestRate, interval: 'minute'}) : undefined;
     const vt = new VirusTotal(inputs.vtApiKey);
-    if (github.context().eventName == 'release') {
-      await runForReleaseEvent(vt, limiter);
-    } else {
+//    if (github.context().eventName == 'release') {
+//      await runForReleaseEvent(vt, limiter);
+//    } else {
       await runForLocalFiles(vt, limiter);
-    }
+//    }
 
     await core.group(`Setting output analysis`, async () => {
       core.setOutput('analysis', outputAnalysis.join(','));
